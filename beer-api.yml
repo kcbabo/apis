@@ -4,3 +4,83 @@ info:
   title: Beer API
   version: 1.0.0
   description: Best API EVER!
+paths:
+  /beers:
+    get:
+      responses:
+        "200":
+          description: Successful response - returns an array of `beer` entities.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/beer'
+      operationId: getbeers
+      summary: List All beers
+      description: Gets a list of all `beer` entities.
+    post:
+      parameters:
+      - name: body
+        description: A new `beer` to be created.
+        schema:
+          $ref: '#/definitions/beer'
+        in: body
+        required: true
+      responses:
+        "201":
+          description: Successful response.
+      operationId: createbeer
+      summary: Create a beer
+      description: Creates a new instance of a `beer`.
+  /beers/{beerId}:
+    get:
+      responses:
+        "200":
+          description: Successful response - returns a single `beer`.
+          schema:
+            $ref: '#/definitions/beer'
+      operationId: getbeer
+      summary: Get a beer
+      description: Gets the details of a single instance of a `beer`.
+    put:
+      parameters:
+      - name: body
+        description: Updated `beer` information.
+        schema:
+          $ref: '#/definitions/beer'
+        in: body
+        required: true
+      responses:
+        "202":
+          description: Successful response.
+      operationId: updatebeer
+      summary: Update a beer
+      description: Updates an existing `beer`.
+    delete:
+      responses:
+        "204":
+          description: Successful response.
+      operationId: deletebeer
+      summary: Delete a beer
+      description: Deletes an existing `beer`.
+    parameters:
+    - name: beerId
+      description: A unique identifier for a `beer`.
+      in: path
+      required: true
+      type: string
+definitions:
+  beer:
+    title: Root Type for beer
+    description: ""
+    type: object
+    properties:
+      name:
+        type: string
+      type:
+        type: string
+      abv:
+        type: string
+    example:
+      name: ""
+      type: ""
+      abv: ""
