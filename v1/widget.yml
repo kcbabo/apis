@@ -1,0 +1,90 @@
+---
+swagger: "2.0"
+info:
+  title: Widget
+  version: 1.0.0
+  description: Widget API
+paths:
+  /widgets:
+    get:
+      responses:
+        "200":
+          description: Successful response - returns an array of `Widget` entities.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Widget'
+      operationId: getwidgets
+      summary: List All widgets
+      description: Gets a list of all `Widget` entities.
+    post:
+      parameters:
+      - name: body
+        description: A new `Widget` to be created.
+        schema:
+          $ref: '#/definitions/Widget'
+        in: body
+        required: true
+      responses:
+        "201":
+          description: Successful response.
+      operationId: createWidget
+      summary: Create a Widget
+      description: Creates a new instance of a `Widget`.
+  /widgets/{widgetId}:
+    get:
+      responses:
+        "200":
+          description: Successful response - returns a single `Widget`.
+          schema:
+            $ref: '#/definitions/Widget'
+      operationId: getWidget
+      summary: Get a Widget
+      description: Gets the details of a single instance of a `Widget`.
+    put:
+      parameters:
+      - name: body
+        description: Updated `Widget` information.
+        schema:
+          $ref: '#/definitions/Widget'
+        in: body
+        required: true
+      responses:
+        "202":
+          description: Successful response.
+      operationId: updateWidget
+      summary: Update a Widget
+      description: Updates an existing `Widget`.
+    delete:
+      responses:
+        "204":
+          description: Successful response.
+      operationId: deleteWidget
+      summary: Delete a Widget
+      description: Deletes an existing `Widget`.
+    parameters:
+    - name: widgetId
+      description: A unique identifier for a `Widget`.
+      in: path
+      required: true
+      type: string
+definitions:
+  Widget:
+    title: Root Type for Widget
+    description: Widget resource
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      weight:
+        format: int32
+        type: integer
+      size:
+        description: size
+        type: string
+    example:
+      name: a name
+      description: a description
+      weight: 15
